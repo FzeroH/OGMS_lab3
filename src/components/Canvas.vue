@@ -19,23 +19,26 @@
       <input type="range" id="camera-z" v-model="cameraZ" min="-1000" max="1000">
     </div>
   </div>
-  <Renderer ref="renderer" resize="window" orbit-ctrl>
+  <Renderer ref="renderer" resize="window" orbit-ctrl :pointer="{ intersectRecursive: true }">
     <Camera :position="{x: cameraX, y: 1000 ,z: 1000 }"  :far="6000"/>
     <Scene ref="scene" background="#ffffff">
       <HemisphereLight />
       <PointLight :position="{x: -398, y: 327, z: -292}"/>
       <GltfModel src="./audiQ7/scene.gltf"
                  @load="onLoad"
+                 @click="carOne"
                  ref="car1"
                  :position="{x: 5, y: 5, z: 5 }"
       />
       <GltfModel src="./audiQ7/scene.gltf"
                 @load="onLoad"
+                 @click="carTwo"
                 ref="car2"
                 :position="{x: 1000, y: 27, z: -1000 }"
       />
       <GltfModel src="./audiQ7/scene.gltf"
                  @load="onLoad"
+                 @click="carThree"
                  ref="car3"
                  :position="{x: -894, y: 27 , z: -1000 }"
       />
@@ -49,12 +52,13 @@ import {
   Camera, Renderer,
   Scene, GltfModel, HemisphereLight, PointLight
 } from 'troisjs'
-// import { Raycaster } from 'three'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Canvas',
   components: { Camera, HemisphereLight, Renderer, Scene, GltfModel, PointLight },
   setup () {
+    const router = useRouter()
     const renderer = ref()
     const scene = ref()
     const car1 = ref()
@@ -66,8 +70,17 @@ export default defineComponent({
     const cameraX = ref(0)
     const cameraY = ref(5)
     const cameraZ = ref(10)
-    const rotModelZ = ref()
-    // const raycaster = new Raycaster()
+
+    const carOne = () => {
+      router.push({ path: '/car', name: 'Car', params: { number: '1' } })
+    }
+    const carTwo = () => {
+      router.push({ path: '/car', name: 'Car', params: { number: '2' } })
+    }
+    const carThree = () => {
+      router.push({ path: '/car', name: 'Car', params: { number: '3' } })
+    }
+
     const onLoad = (obj) => {
       console.log(obj)
     }
@@ -87,8 +100,10 @@ export default defineComponent({
       cameraX,
       cameraY,
       cameraZ,
-      rotModelZ,
-      onLoad
+      onLoad,
+      carOne,
+      carTwo,
+      carThree
     }
   }
 })
