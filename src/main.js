@@ -1,8 +1,6 @@
 import { createApp } from 'vue'
-// import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
 import App from './App.vue'
+import router from './router'
 
-// const VueDynamicForms = createDynamicForms()
-
-createApp(App)
+createApp(App).use(router)
   .mount('#app')
