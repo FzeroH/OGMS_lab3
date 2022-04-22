@@ -24,24 +24,29 @@
     <Scene ref="scene" background="#ffffff">
       <HemisphereLight />
       <PointLight :position="{x: -398, y: 327, z: -292}"/>
-      <GltfModel src="./audiQ7/scene.gltf"
-                 @load="onLoad"
-                 @click="carOne"
-                 ref="car1"
-                 :position="{x: 5, y: 5, z: 5 }"
-      />
-      <GltfModel src="./audiQ7/scene.gltf"
-                @load="onLoad"
-                 @click="carTwo"
-                ref="car2"
-                :position="{x: 1000, y: 27, z: -1000 }"
-      />
-      <GltfModel src="./audiQ7/scene.gltf"
-                 @load="onLoad"
-                 @click="carThree"
-                 ref="car3"
-                 :position="{x: -894, y: 27 , z: -1000 }"
-      />
+      <Group>
+        <GltfModel src="./audiQ7/scene.gltf"
+                   @load="onLoad"
+                   @click="carOne"
+                   ref="car1"
+                   :position="{x: 5, y: 5, z: 5 }"
+                   :rotation="{ y: rotY }"
+        />
+        <GltfModel src="./audiQ7/scene.gltf"
+                  @load="onLoad"
+                   @click="carTwo"
+                  ref="car2"
+                  :position="{x: 1000, y: 27, z: -1000 }"
+                  :rotation="{ y: rotY }"
+        />
+        <GltfModel src="./audiQ7/scene.gltf"
+                   @load="onLoad"
+                   @click="carThree"
+                   ref="car3"
+                   :position="{x: -894, y: 27 , z: -1000 }"
+                   :rotation="{ y: rotY }"
+        />
+      </Group>
     </Scene>
   </Renderer>
 </template>
@@ -50,17 +55,18 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import {
   Camera, Renderer,
-  Scene, GltfModel, HemisphereLight, PointLight
+  Scene, GltfModel, HemisphereLight, PointLight, Group
 } from 'troisjs'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Canvas',
-  components: { Camera, HemisphereLight, Renderer, Scene, GltfModel, PointLight },
-  setup () {
+  components: { Camera, HemisphereLight, Renderer, Scene, GltfModel, PointLight, Group },
+  setup: function () {
     const router = useRouter()
     const renderer = ref()
     const scene = ref()
+    const rotY = ref(0)
     const car1 = ref()
     const car2 = ref()
     const car3 = ref()
@@ -85,12 +91,19 @@ export default defineComponent({
       console.log(obj)
     }
 
+    const rotationObject = () => {
+      rotY.value -= 0.005
+    }
+
     onMounted(() => {
-      console.log(car1.value)
+      renderer.value.onBeforeRender(() => {
+        rotationObject()
+      })
     })
     return {
       renderer,
       scene,
+      rotY,
       car1,
       car2,
       car3,
@@ -111,7 +124,7 @@ export default defineComponent({
 
 <style scoped>
 .settings {
-  display:flex;
+  display:none;
   flex-direction: row;
   width: fit-content;
   background-color: #cec8c8;
