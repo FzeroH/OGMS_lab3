@@ -62,7 +62,7 @@ import { useRouter } from 'vue-router'
 export default defineComponent({
   name: 'Canvas',
   components: { Camera, HemisphereLight, Renderer, Scene, GltfModel, PointLight, Group },
-  setup: function () {
+  setup () {
     const router = useRouter()
     const renderer = ref()
     const scene = ref()
@@ -124,11 +124,10 @@ export default defineComponent({
 
 <style scoped>
 .settings {
-  display:none;
+  display:flex;
   flex-direction: row;
   width: fit-content;
   background-color: #cec8c8;
-  z-index: 9999;
 }
 .settings > div {
   display:flex;
