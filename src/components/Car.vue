@@ -1,46 +1,46 @@
 <template>
-  <img src="../assets/audiQ7.jpg" alt="AudiQ7">
+  <img :src="require(`../assets/${carData.img}`)" alt="car">
   <h2>Технические характеристики</h2>
   <ul>
     <li>
       <p>Модель:</p>
-      <p>{{audiQ7.model}}</p>
+      <p>{{carData.model}}</p>
     </li>
     <li>
       <p>Тип двигателя:</p>
-      <p>{{audiQ7.dvsType}}</p>
+      <p>{{carData.dvsType}}</p>
     </li>
     <li>
       <p>Расположение цилиндров:</p>
-      <p>{{audiQ7.cylArrangement}}</p>
+      <p>{{carData.cylArrangement}}</p>
     </li>
     <li>
       <p>Количество цилиндров:</p>
-      <p>{{audiQ7.numCyl}}</p>
+      <p>{{carData.numCyl}}</p>
     </li>
     <li>
       <p>Объем двигателя:</p>
-      <p>{{audiQ7.eCapacity}}</p>
+      <p>{{carData.eCapacity}}</p>
     </li>
     <li>
       <p>Максимальная мощность, л. с. при об/мин:</p>
-      <p>{{audiQ7.maxPower}}</p>
+      <p>{{carData.maxPower}}</p>
     </li>
     <li>
       <p>Максимальный крутящий момент, Н·м при об/мин:</p>
-      <p>{{audiQ7.maxTorque}}</p>
+      <p>{{carData.maxTorque}}</p>
     </li>
     <li>
       <p>Количество передач:</p>
-      <p>{{audiQ7.numTransmission}}</p>
+      <p>{{carData.numTransmission}}</p>
     </li>
     <li>
       <p>Собственная масса *:</p>
-      <p>{{ audiQ7.deadweight }}</p>
+      <p>{{ carData.deadweight }}</p>
     </li>
     <li>
       <p>Допустимая полная масса:</p>
-      <p>{{audiQ7.totalMass}}</p>
+      <p>{{carData.totalMass}}</p>
     </li>
   </ul>
 </template>
@@ -51,25 +51,14 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'Car',
   props: {
-    number: {
-      type: String,
-      default: '0'
+    car: {
+      type: String
     }
   },
-  setup () {
-    const audiQ7 = ref({
-      model: '45 TDI quattro',
-      dvsType: '45 TDI',
-      cylArrangement: 'V',
-      numCyl: '6',
-      eCapacity: '2967 см^3',
-      maxPower: '249 / 3000-4500',
-      maxTorque: '600 / 1500-2750',
-      numTransmission: '8',
-      deadweight: '1980 кг',
-      totalMass: '2750 кг'
-    })
-    return { audiQ7 }
+  setup (props, _) {
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    const carData = ref(JSON.parse(props.car))
+    return { carData }
   }
 })
 </script>

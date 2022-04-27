@@ -12,11 +12,11 @@
     <div>
       <h5>Camera</h5>
       <label for="camera-x">x</label>
-      <input type="range" id="camera-x" v-model="cameraX" min="-1000" max="1000">
+      <input type="range" id="camera-x" min="-1000" max="1000">
       <label for="camera-y">y</label>
-      <input type="range" id="camera-y" v-model="cameraY" min="-1000" max="1000">
+      <input type="range" id="camera-y" min="-1000" max="1000">
       <label for="camera-z">z</label>
-      <input type="range" id="camera-z" v-model="cameraZ" min="-1000" max="1000">
+      <input type="range" id="camera-z" min="-1000" max="1000">
     </div>
   </div>
   <Renderer ref="renderer" resize="window" orbit-ctrl :pointer="{ intersectRecursive: true }">
@@ -32,11 +32,11 @@
                    :position="{x: 5, y: 5, z: 5 }"
                    :rotation="{ y: rotY }"
         />
-        <GltfModel src="./audiQ7/scene.gltf"
+        <GltfModel src="./audi_r8/scene.gltf"
                   @load="onLoad"
                    @click="carTwo"
                   ref="car2"
-                  :position="{x: 1000, y: 27, z: -1000 }"
+                  :position="{x: 504, y: 62, z: -1000 }"
                   :rotation="{ y: rotY }"
         />
         <GltfModel src="./audiQ7/scene.gltf"
@@ -67,24 +67,61 @@ export default defineComponent({
     const renderer = ref()
     const scene = ref()
     const rotY = ref(0)
-    const car1 = ref()
-    const car2 = ref()
-    const car3 = ref()
     const modelX = ref(5)
     const modelY = ref(5)
     const modelZ = ref(5)
-    const cameraX = ref(0)
-    const cameraY = ref(1000)
-    const cameraZ = ref(1000)
+
+    const carAudiQ7 = ref({
+      img: 'audiQ7.jpg',
+      model: '45 TDI quattro',
+      dvsType: '45 TDI',
+      cylArrangement: 'V',
+      numCyl: '6',
+      eCapacity: '2967 см^3',
+      maxPower: '249 / 3000-4500',
+      maxTorque: '600 / 1500-2750',
+      numTransmission: '8',
+      deadweight: '1980 кг',
+      totalMass: '2750 кг'
+    })
+    const audiQ7 = JSON.stringify(carAudiQ7.value)
+    const carAudiR8 = ref({
+      img: 'audi_r8.jpg',
+      model: '5.2 FSI quattro S tronic',
+      dvsType: '',
+      cylArrangement: 'V',
+      numCyl: '10',
+      eCapacity: '2967 см^3',
+      maxPower: '540 (397) / 7800',
+      maxTorque: '540 / 6500',
+      numTransmission: '7',
+      deadweight: '1595 кг',
+      totalMass: '1895 кг'
+    })
+    const audiR8 = JSON.stringify(carAudiR8.value)
 
     const carOne = () => {
-      router.push({ path: '/car', name: 'Car', params: { number: '1' } })
+      router.push({
+        path: '/car',
+        name: 'Car',
+        query: { carName: 'audiQ7' },
+        params: {
+          car: audiQ7
+        }
+      })
     }
     const carTwo = () => {
-      router.push({ path: '/car', name: 'Car', params: { number: '2' } })
+      router.push({
+        path: '/car',
+        name: 'Car',
+        query: { carName: 'audiR8' },
+        params: {
+          car: audiR8
+        }
+      })
     }
     const carThree = () => {
-      router.push({ path: '/car', name: 'Car', params: { number: '3' } })
+      router.push({ path: '/car', name: 'Car', params: { car: audiQ7.value } })
     }
 
     const onLoad = (obj) => {
@@ -104,15 +141,11 @@ export default defineComponent({
       renderer,
       scene,
       rotY,
-      car1,
-      car2,
-      car3,
       modelX,
       modelY,
       modelZ,
-      cameraX,
-      cameraY,
-      cameraZ,
+      audiQ7,
+      audiR8,
       onLoad,
       carOne,
       carTwo,
