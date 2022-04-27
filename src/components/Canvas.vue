@@ -20,7 +20,7 @@
     </div>
   </div>
   <Renderer ref="renderer" resize="window" orbit-ctrl :pointer="{ intersectRecursive: true }">
-    <Camera :position="{x: cameraX, y: 1000 ,z: 1000 }"  :far="6000"/>
+    <Camera :position="{x: 0, y: 345 ,z: 1000 }"  :far="6000"/>
     <Scene ref="scene" background="#ffffff">
       <HemisphereLight />
       <PointLight :position="{x: -398, y: 327, z: -292}"/>
@@ -74,8 +74,8 @@ export default defineComponent({
     const modelY = ref(5)
     const modelZ = ref(5)
     const cameraX = ref(0)
-    const cameraY = ref(5)
-    const cameraZ = ref(10)
+    const cameraY = ref(1000)
+    const cameraZ = ref(1000)
 
     const carOne = () => {
       router.push({ path: '/car', name: 'Car', params: { number: '1' } })
@@ -124,7 +124,7 @@ export default defineComponent({
 
 <style scoped>
 .settings {
-  display:flex;
+  display:none;
   flex-direction: row;
   width: fit-content;
   background-color: #cec8c8;
