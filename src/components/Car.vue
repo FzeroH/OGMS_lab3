@@ -3,44 +3,44 @@
   <h2>Технические характеристики</h2>
   <ul>
     <li>
-      <p class="character">Модель:</p>
-      <p class="value">{{audiQ7.model}}</p>
+      <p>Модель:</p>
+      <p>{{audiQ7.model}}</p>
     </li>
     <li>
-      <p class="character">Тип двигателя:</p>
-      <p class="value">{{audiQ7.dvsType}}</p>
+      <p>Тип двигателя:</p>
+      <p>{{audiQ7.dvsType}}</p>
     </li>
     <li>
-      <p class="character">Расположение цилиндров:</p>
-      <p class="value">{{audiQ7.cylArrangement}}</p>
+      <p>Расположение цилиндров:</p>
+      <p>{{audiQ7.cylArrangement}}</p>
     </li>
     <li>
-      <p class="character">Количество цилиндров:</p>
-      <p class="value">{{audiQ7.numCyl}}</p>
+      <p>Количество цилиндров:</p>
+      <p>{{audiQ7.numCyl}}</p>
     </li>
     <li>
-      <p class="character">Объем двигателя:</p>
-      <p class="value">{{audiQ7.eCapacity}}</p>
+      <p>Объем двигателя:</p>
+      <p>{{audiQ7.eCapacity}}</p>
     </li>
     <li>
-      <p class="character">Максимальная мощность, л. с. при об/мин:</p>
-      <p class="value">{{audiQ7.maxPower}}</p>
+      <p>Максимальная мощность, л. с. при об/мин:</p>
+      <p>{{audiQ7.maxPower}}</p>
     </li>
     <li>
-      <p class="character">Максимальный крутящий момент, Н·м при об/мин:</p>
-      <p class="value">{{audiQ7.maxTorque}}</p>
+      <p>Максимальный крутящий момент, Н·м при об/мин:</p>
+      <p>{{audiQ7.maxTorque}}</p>
     </li>
     <li>
-      <p class="character">Количество передач:</p>
-      <p class="value">{{audiQ7.numTransmission}}</p>
+      <p>Количество передач:</p>
+      <p>{{audiQ7.numTransmission}}</p>
     </li>
     <li>
-      <p class="character">Собственная масса *:</p>
-      <p class="value">{{ audiQ7.deadweight }}</p>
+      <p>Собственная масса *:</p>
+      <p>{{ audiQ7.deadweight }}</p>
     </li>
     <li>
-      <p class="character">Допустимая полная масса:</p>
-      <p class="value">{{audiQ7.totalMass}}</p>
+      <p>Допустимая полная масса:</p>
+      <p>{{audiQ7.totalMass}}</p>
     </li>
   </ul>
 </template>
@@ -93,14 +93,19 @@ ul {
 ul > li{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  font-size: 18px;
+  justify-content: space-between;
+  margin: 10px 30px 0 30px;
+  border: 1px solid black;
 }
 
-.character{
-
+ul > li:last-child {
+  margin-bottom: 10px;
 }
-.value{
 
+ul > li > p{
+  width: 25%;
+  font-size: 19px;
+  text-align: start;
+  padding: 10px;
 }
 </style>
