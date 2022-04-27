@@ -21,26 +21,23 @@
   </div>
   <Renderer ref="renderer" resize="window" orbit-ctrl :pointer="{ intersectRecursive: true }">
     <Camera :position="{x: 0, y: 345 ,z: 1000 }"  :far="6000"/>
-    <Scene ref="scene" background="#ffffff">
+    <Scene ref="scene" background="#0f0f0f">
       <HemisphereLight />
       <PointLight :position="{x: -398, y: 327, z: -292}"/>
       <Group>
         <GltfModel src="./audiQ7/scene.gltf"
-                   @load="onLoad"
                    @click="carOne"
                    ref="car1"
                    :position="{x: 5, y: 5, z: 5 }"
                    :rotation="{ y: rotY }"
         />
         <GltfModel src="./audi_r8/scene.gltf"
-                  @load="onLoad"
                    @click="carTwo"
                   ref="car2"
                   :position="{x: 504, y: 62, z: -1000 }"
                   :rotation="{ y: rotY }"
         />
         <GltfModel src="./audiQ7/scene.gltf"
-                   @load="onLoad"
                    @click="carThree"
                    ref="car3"
                    :position="{x: -894, y: 27 , z: -1000 }"
@@ -124,10 +121,6 @@ export default defineComponent({
       router.push({ path: '/car', name: 'Car', params: { car: audiQ7.value } })
     }
 
-    const onLoad = (obj) => {
-      console.log(obj)
-    }
-
     const rotationObject = () => {
       rotY.value -= 0.005
     }
@@ -146,7 +139,6 @@ export default defineComponent({
       modelZ,
       audiQ7,
       audiR8,
-      onLoad,
       carOne,
       carTwo,
       carThree
