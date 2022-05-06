@@ -37,10 +37,10 @@
                   :position="{x: 504, y: 62, z: -1000 }"
                   :rotation="{ y: rotY }"
         />
-        <GltfModel src="./audiQ7/scene.gltf"
+        <GltfModel src="./bmw_i8/scene.gltf"
                    @click="carThree"
                    ref="car3"
-                   :position="{x: -894, y: 27 , z: -1000 }"
+                   :position="{x: -894, y: 115 , z: -1000 }"
                    :rotation="{ y: rotY }"
         />
       </Group>
@@ -81,7 +81,6 @@ export default defineComponent({
       deadweight: '1980 кг',
       totalMass: '2750 кг'
     })
-    const audiQ7 = JSON.stringify(carAudiQ7.value)
     const carAudiR8 = ref({
       img: 'audi_r8.jpg',
       model: '5.2 FSI quattro S tronic',
@@ -95,6 +94,21 @@ export default defineComponent({
       deadweight: '1595 кг',
       totalMass: '1895 кг'
     })
+    const carBmwI8 = ref({
+      img: 'bmw_i8.jpg',
+      model: '',
+      dvsType: 'Рядный, 3-цилиндровый',
+      cylArrangement: '',
+      numCyl: '3',
+      eCapacity: '1499 см^3',
+      maxPower: '231 (170) / 6000',
+      maxTorque: '320 (33) / 3700',
+      numTransmission: '6',
+      deadweight: '1535 кг',
+      totalMass: '1920 кг'
+    })
+    const audiQ7 = JSON.stringify(carAudiQ7.value)
+    const bmwI8 = JSON.stringify(carBmwI8.value)
     const audiR8 = JSON.stringify(carAudiR8.value)
 
     const carOne = () => {
@@ -118,7 +132,14 @@ export default defineComponent({
       })
     }
     const carThree = () => {
-      router.push({ path: '/car', name: 'Car', params: { car: audiQ7.value } })
+      router.push({
+        path: '/car',
+        name: 'Car',
+        query: { carName: 'bmwI8' },
+        params: {
+          car: bmwI8
+        }
+      })
     }
 
     const rotationObject = () => {
