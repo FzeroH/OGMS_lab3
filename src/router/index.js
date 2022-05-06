@@ -14,7 +14,6 @@ const routes = [
     component: Car,
     props: true
   }
-
 ]
 
 const router = createRouter({
